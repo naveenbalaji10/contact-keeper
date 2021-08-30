@@ -2,7 +2,6 @@ import React, { Fragment, useContext } from "react";
 import ContactContext from "../../context/contact/contactContext";
 import ContactItem from "./ContactItem";
 import { CSSTransition, TransitionGroup } from "react-transition-group";
-import { Item } from "semantic-ui-react";
 
 const Contacts = () => {
   const contactContext = useContext(ContactContext);

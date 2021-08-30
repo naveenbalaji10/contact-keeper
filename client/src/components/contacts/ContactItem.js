@@ -1,8 +1,6 @@
 import React, { useContext } from "react";
 import PropTypes from "prop-types";
 import ContactContext from "../../context/contact/contactContext";
-import ContactForm from "./ContactForm";
-import { SET_CURRENT } from "../../context/types";
 
 const ContactItem = ({ contact }) => {
   const { id, name, email, phone, type } = contact;
