@@ -27,13 +27,14 @@ const AuthState = (props) => {
   //load user
   const loadUser = async () => {
     if (localStorage.token) {
-      //auth (private)
+      //auth (private) setting headers as global
       setAuthToken(localStorage.token);
     }
     try {
       const res = await axios.get("/api/auth");
       dispatch({ type: USER_LOADED, payload: res.data });
     } catch (err) {
+      //auth error
       dispatch({ type: AUTH_ERROR });
     }
   };
@@ -41,7 +42,7 @@ const AuthState = (props) => {
   const Register = async (formData) => {
     const config = {
       headers: {
-        "content-type": "application/json",
+        "Content-Type": "application/json",
       },
     };
     try {
@@ -52,15 +53,29 @@ const AuthState = (props) => {
       dispatch({ type: REGISTER_FAIL, payload: err.response.data.msg });
     }
   };
-  //register fail
-
-  //user load
 
   //login success
-
   //loginfail
+  const Login = async (formData) => {
+    const config = {
+      headers: {
+        "Content-Type": "application/json",
+      },
+    };
+    try {
+      const res = await axios.post("/api/auth", formData, config);
+      dispatch({ type: LOGIN_SUCCESS, payload: res.data });
+      loadUser();
+    } catch (err) {
+      dispatch({ type: LOGIN_FAIL, payload: err.response.data.msg });
+    }
+  };
 
-  //auth error
+  //logout
+
+  const logout = () => {
+    dispatch({ type: LOGOUT });
+  };
 
   //clear error
   const clearError = () => {
@@ -77,6 +92,8 @@ const AuthState = (props) => {
         Register,
         clearError,
         loadUser,
+        Login,
+        logout,
       }}
     >
       {props.children}

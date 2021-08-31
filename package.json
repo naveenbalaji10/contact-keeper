@@ -4,7 +4,7 @@
   "description": "contact manager app",
   "main": "server.js",
   "scripts": {
-    "start": "node server.js",
+    "start": "node --max-http-header-size=1000000 server.js",
     "server": "nodemon server.js",
     "client": "npm start --prefix client",
     "clientinstall": "npm install --prefix client",

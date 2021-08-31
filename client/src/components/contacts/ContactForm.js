@@ -9,7 +9,8 @@ const ContactForm = () => {
   });
   const { name, phone, email, type } = contact;
   const contactContext = useContext(ContactContext);
-  const { addContact, clearCurrent, updateContact, current } = contactContext;
+  const { addContact, clearCurrent, updateContact, current, getContact } =
+    contactContext;
 
   useEffect(() => {
     if (current !== null) {
@@ -32,6 +33,7 @@ const ContactForm = () => {
       addContact(contact);
     } else {
       updateContact(contact);
+      getContact();
     }
     clickClear();
   };
